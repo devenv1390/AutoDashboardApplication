@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AutoDashboardApplication</string>
+    <string name="car_speed">0</string>
+    <string name="speed">km/h</string>
 </resources>
