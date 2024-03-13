@@ -57,37 +57,14 @@ class MainActivity : AppCompatActivity() {
         vmMain.getTime()
         vmMain.updateRemainData()
 
-        val currentDate = Observer<String> { date ->
-            tvDate.text = date.toString()
-        }
-        vmMain.date.observe(this, currentDate)
-        val currentTime = Observer<String> { time ->
-            tvTime.text = time.toString()
-        }
-        vmMain.time.observe(this, currentTime)
+        initDateTime()
+        initRemain()
+        initBattery()
+        initSpeed()
+        initPowerRecycle()
+    }
 
-        val currentRemain = Observer<Int> { remain ->
-            tvRemainNum.text = remain.toString()
-        }
-        vmMain.remain.observe(this, currentRemain)
-
-        val currentBattery = Observer<Int> { battery ->
-            val prevBattery = pbBattery.progress
-            val animator = ValueAnimator.ofInt(prevBattery, battery)
-            animator.duration = 200
-            animator.addUpdateListener { animation ->
-                val progress = animation.animatedValue as Int
-                pbBattery.progress = progress
-            }
-            animator.start()
-        }
-        vmMain.battery.observe(this, currentBattery)
-
-        val currentSpeed = Observer<Int> { speed ->
-            tvCarSpeed.text = speed.toString()
-        }
-        vmMain.speed.observe(this, currentSpeed)
-
+    private fun initPowerRecycle() {
         val currentPower = Observer<Int> { power ->
             val prevPower = pbPower.progress
             val animator = ValueAnimator.ofInt(prevPower, power)
@@ -112,6 +89,45 @@ class MainActivity : AppCompatActivity() {
             animator.start()
         }
         vmMain.recycle.observe(this, currentRecycle)
+    }
+
+    private fun initSpeed() {
+        val currentSpeed = Observer<Int> { speed ->
+            tvCarSpeed.text = speed.toString()
+        }
+        vmMain.speed.observe(this, currentSpeed)
+    }
+
+    private fun initBattery() {
+        val currentBattery = Observer<Int> { battery ->
+            val prevBattery = pbBattery.progress
+            val animator = ValueAnimator.ofInt(prevBattery, battery)
+            animator.duration = 200
+            animator.addUpdateListener { animation ->
+                val progress = animation.animatedValue as Int
+                pbBattery.progress = progress
+            }
+            animator.start()
+        }
+        vmMain.battery.observe(this, currentBattery)
+    }
+
+    private fun initRemain() {
+        val currentRemain = Observer<Int> { remain ->
+            tvRemainNum.text = remain.toString()
+        }
+        vmMain.remain.observe(this, currentRemain)
+    }
+
+    private fun initDateTime() {
+        val currentDate = Observer<String> { date ->
+            tvDate.text = date.toString()
+        }
+        vmMain.date.observe(this, currentDate)
+        val currentTime = Observer<String> { time ->
+            tvTime.text = time.toString()
+        }
+        vmMain.time.observe(this, currentTime)
     }
 
     private fun setData() {
