@@ -1,7 +1,7 @@
 package com.qky.autodashboardapplication.ui;
 
 /**
- * Demo class
+ * ReflectTextView class
  *
  * @author kaiyuan.qin
  * @date 2024/3/12
