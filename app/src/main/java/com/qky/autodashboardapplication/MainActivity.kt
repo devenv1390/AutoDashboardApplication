@@ -1,5 +1,6 @@
 package com.qky.autodashboardapplication
 
+import android.animation.ValueAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -11,7 +12,7 @@ import com.qky.autodashboardapplication.vm.MainViewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var tvCarSpeed: TextView
     private lateinit var pbBattery: ProgressBar
-    private lateinit var tvRemainNum:TextView
+    private lateinit var tvRemainNum: TextView
 
     private val vmMain = MainViewModel()
 
@@ -38,13 +39,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         vmMain.updateRemainData()
-        val currentRemain = Observer<Int> { remain->
+        val currentRemain = Observer<Int> { remain ->
             tvRemainNum.text = remain.toString()
         }
-        vmMain.remain.observe(this,currentRemain)
+        vmMain.remain.observe(this, currentRemain)
 
         val currentBattery = Observer<Int> { battery ->
-            pbBattery.progress = battery
+            val prevBattery = pbBattery.progress
+            val animator = ValueAnimator.ofInt(prevBattery, battery)
+            animator.duration = 200
+            animator.addUpdateListener { animation ->
+                val progress = animation.animatedValue as Int
+                pbBattery.progress = progress
+            }
+            animator.start()
         }
         vmMain.battery.observe(this, currentBattery)
 
