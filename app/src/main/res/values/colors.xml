@@ -5,4 +5,9 @@
     <color name="green">#43CF7C</color>
     <color name="main_text">#FFFFFFFF</color>
     <color name="background_color">#20212C</color>
+    <color name="recycle">#43CF7C</color>
+    <color name="power">#66CCFF</color>
+    <color name="warning">#FFFFFF</color>
+    <color name="power_background">#4DFFFFFF</color>
+    <color name="recycle_background">#80FFFFFF</color>
 </resources>
