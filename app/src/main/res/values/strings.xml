@@ -9,6 +9,6 @@
     <string name="remains_unit">km</string>
     <string name="recycle">Recycle</string>
     <string name="power">Power</string>
-    <string name="space_progress">|</string>
+    <string name="power_title">kW</string>
     <string name="test">测试</string>
 </resources>

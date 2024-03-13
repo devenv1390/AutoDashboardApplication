@@ -106,59 +106,75 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.qky.autodashboardapplication.ui.EdgeTransparentView
+                <FrameLayout
+                    android:id="@+id/fl_reflect_left"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:edge_width="300dp"
-                    app:edge_position="bottom">
+                    android:layout_height="wrap_content">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_power_recycle_copy"
+                    <TextView
+                        android:id="@+id/tv_power_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/power_title"
+                        android:textColor="@color/main_text"
+                        android:textSize="36sp" />
+
+                    <com.qky.autodashboardapplication.ui.EdgeTransparentView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:alpha="0.5"
-                        app:layout_constraintEnd_toEndOf="@+id/pb_recycle"
-                        app:layout_constraintStart_toEndOf="@+id/pb_recycle">
+                        app:edge_position="bottom"
+                        app:edge_width="300dp">
 
-                        <ProgressBar
-                            android:id="@+id/pb_recycle_copy"
-                            style="@android:style/Widget.ProgressBar.Horizontal"
-                            android:layout_width="150dp"
-                            android:layout_height="0dp"
-                            android:layout_marginStart="65dp"
-                            android:progress="50"
-                            android:progressBackgroundTint="@android:color/darker_gray"
-                            android:progressTint="@color/recycle"
-                            android:rotationY="180"
-                            app:layout_constraintBottom_toBottomOf="@+id/pb_power_copy"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/pb_power_copy" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_power_recycle_copy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.5"
+                            app:layout_constraintEnd_toEndOf="@+id/pb_recycle"
+                            app:layout_constraintStart_toEndOf="@+id/pb_recycle">
 
-                        <ProgressBar
-                            android:id="@+id/pb_power_copy"
-                            style="@android:style/Widget.ProgressBar.Horizontal"
-                            android:layout_width="150dp"
-                            android:layout_height="65dp"
-                            android:progress="50"
-                            android:progressBackgroundTint="@android:color/darker_gray"
-                            android:progressTint="@color/power"
-                            android:visibility="visible"
-                            app:layout_constraintBottom_toBottomOf="@+id/tv_space_progress_copy"
-                            app:layout_constraintStart_toStartOf="@+id/tv_space_progress_copy"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <ProgressBar
+                                android:id="@+id/pb_recycle_copy"
+                                style="@android:style/Widget.ProgressBar.Horizontal"
+                                android:layout_width="150dp"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="65dp"
+                                android:progress="50"
+                                android:progressBackgroundTint="@android:color/darker_gray"
+                                android:progressTint="@color/recycle"
+                                android:rotationY="180"
+                                app:layout_constraintBottom_toBottomOf="@+id/pb_power_copy"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/pb_power_copy" />
 
-                        <TextView
-                            android:id="@+id/tv_space_progress_copy"
-                            android:layout_width="5dp"
-                            android:layout_height="70dp"
-                            android:background="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/pb_recycle_copy"
-                            app:layout_constraintStart_toEndOf="@+id/pb_recycle_copy"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <ProgressBar
+                                android:id="@+id/pb_power_copy"
+                                style="@android:style/Widget.ProgressBar.Horizontal"
+                                android:layout_width="150dp"
+                                android:layout_height="65dp"
+                                android:progress="50"
+                                android:progressBackgroundTint="@android:color/darker_gray"
+                                android:progressTint="@color/power"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="@+id/tv_space_progress_copy"
+                                app:layout_constraintStart_toStartOf="@+id/tv_space_progress_copy"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            <TextView
+                                android:id="@+id/tv_space_progress_copy"
+                                android:layout_width="5dp"
+                                android:layout_height="70dp"
+                                android:background="@color/white"
+                                app:layout_constraintEnd_toEndOf="@+id/pb_recycle_copy"
+                                app:layout_constraintStart_toEndOf="@+id/pb_recycle_copy"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                </com.qky.autodashboardapplication.ui.EdgeTransparentView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.qky.autodashboardapplication.ui.EdgeTransparentView>
+
+                </FrameLayout>
 
             </LinearLayout>
 
