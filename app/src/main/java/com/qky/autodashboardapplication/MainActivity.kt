@@ -13,6 +13,8 @@ import com.qky.autodashboardapplication.vm.MainViewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var tvCarSpeed: TextView
     private lateinit var tvRemainNum: TextView
+    private lateinit var tvDate: TextView
+    private lateinit var tvTime: TextView
 
     private lateinit var pbBattery: ProgressBar
     private lateinit var pbPower: ProgressBar
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         tvCarSpeed = findViewById(R.id.tv_car_speed)
         tvRemainNum = findViewById(R.id.tv_remain_num)
+        tvDate = findViewById(R.id.tv_date)
+        tvTime = findViewById(R.id.tv_time)
 
         pbBattery = findViewById(R.id.pb_battery)
         pbPower = findViewById(R.id.pb_power)
@@ -50,8 +54,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        vmMain.getTime()
         vmMain.updateRemainData()
-//        tvSpaceProgress.bringToFront()
+
+        val currentDate = Observer<String> { date ->
+            tvDate.text = date.toString()
+        }
+        vmMain.date.observe(this, currentDate)
+        val currentTime = Observer<String> { time ->
+            tvTime.text = time.toString()
+        }
+        vmMain.time.observe(this, currentTime)
+
         val currentRemain = Observer<Int> { remain ->
             tvRemainNum.text = remain.toString()
         }
