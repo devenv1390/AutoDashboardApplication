@@ -211,6 +211,11 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/test" />
+                <com.amap.api.maps.MapView
+                    android:id="@+id/map_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.amap.api.maps.MapView>
             </LinearLayout>
 
             <LinearLayout
