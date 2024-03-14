@@ -59,6 +59,7 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxjava:3.0.0")
     implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
     implementation(files("libs/AMap3DMap_9.8.3_AMapNavi_9.8.3_AMapSearch_9.7.0_AMapLocation_6.4.2_20231215.jar"))
+//    implementation("org.osmdroid:osmdroid-android:6.1.18")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
