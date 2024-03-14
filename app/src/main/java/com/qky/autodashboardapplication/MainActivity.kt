@@ -8,6 +8,12 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import com.amap.api.location.AMapLocationClient
+import com.amap.api.maps.AMap
+import com.amap.api.maps.MapView
+import com.amap.api.maps.MapsInitializer
+import com.amap.api.maps.UiSettings
+import com.amap.api.services.core.ServiceSettings
 import com.qky.autodashboardapplication.vm.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +28,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pbPowerCopy: ProgressBar
     private lateinit var pbRecycleCopy: ProgressBar
 
+    private lateinit var mapView: MapView
+    private lateinit var aMap: AMap
+
     private val vmMain = MainViewModel()
 
     private lateinit var btnTest: Button
@@ -31,9 +40,40 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         setContentView(R.layout.activity_main)
 
+        //定位隐私政策同意
+        AMapLocationClient.updatePrivacyShow(this, true, true);
+        AMapLocationClient.updatePrivacyAgree(this, true);
+        //地图隐私政策同意
+        MapsInitializer.updatePrivacyShow(this, true, true);
+        MapsInitializer.updatePrivacyAgree(this, true);
+        //搜索隐私政策同意
+        ServiceSettings.updatePrivacyShow(this, true, true);
+        ServiceSettings.updatePrivacyAgree(this, true);
+
         getView()
+        mapView.onCreate(savedInstanceState)
         initView()
         initClickEvent()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
     }
 
     private fun getView() {
@@ -47,6 +87,9 @@ class MainActivity : AppCompatActivity() {
         pbRecycle = findViewById(R.id.pb_recycle)
         pbPowerCopy = findViewById(R.id.pb_power_copy)
         pbRecycleCopy = findViewById(R.id.pb_recycle_copy)
+
+        mapView = findViewById(R.id.map_view)
+        aMap = mapView.map
 
         btnTest = findViewById(R.id.btn_test)
     }
@@ -66,6 +109,14 @@ class MainActivity : AppCompatActivity() {
         initBattery()
         initSpeed()
         initPowerRecycle()
+        initMap()
+    }
+
+    private fun initMap() {
+        val mUiSettings: UiSettings = aMap.uiSettings
+        mUiSettings.isCompassEnabled = true
+        mUiSettings.isScaleControlsEnabled = true
+        mUiSettings.isZoomControlsEnabled = true
     }
 
     private fun initPowerRecycle() {
@@ -137,6 +188,4 @@ class MainActivity : AppCompatActivity() {
     private fun setData() {
         vmMain.changeData()
     }
-
-
 }
