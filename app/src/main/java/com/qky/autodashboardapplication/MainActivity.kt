@@ -31,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         setContentView(R.layout.activity_main)
 
+        getView()
+        initView()
+        initClickEvent()
+    }
+
+    private fun getView() {
         tvCarSpeed = findViewById(R.id.tv_car_speed)
         tvRemainNum = findViewById(R.id.tv_remain_num)
         tvDate = findViewById(R.id.tv_date)
@@ -43,9 +49,6 @@ class MainActivity : AppCompatActivity() {
         pbRecycleCopy = findViewById(R.id.pb_recycle_copy)
 
         btnTest = findViewById(R.id.btn_test)
-
-        initView()
-        initClickEvent()
     }
 
     private fun initClickEvent() {
