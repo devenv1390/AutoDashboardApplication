@@ -13,6 +13,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Space
+            android:id="@+id/sp_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4" />
+
         <LinearLayout
             android:id="@+id/ll_main"
             android:layout_width="match_parent"
@@ -28,11 +34,6 @@
                 android:layout_weight="1"
                 android:baselineAligned="false"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_space_left"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp" />
 
                 <LinearLayout
                     android:id="@+id/ll_title_left"
@@ -225,11 +226,6 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-
-                <TextView
-                    android:id="@+id/tv_space_right"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp" />
 
                 <com.qky.autodashboardapplication.ui.ReflectTextView
                     android:id="@+id/tv_car_speed"
