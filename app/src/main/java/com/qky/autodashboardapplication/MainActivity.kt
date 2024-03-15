@@ -40,6 +40,14 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         setContentView(R.layout.activity_main)
 
+        initPrivate()
+        getView()
+        mapView.onCreate(savedInstanceState)
+        initView()
+        initClickEvent()
+    }
+
+    private fun initPrivate() {
         //定位隐私政策同意
         AMapLocationClient.updatePrivacyShow(this, true, true);
         AMapLocationClient.updatePrivacyAgree(this, true);
@@ -49,11 +57,6 @@ class MainActivity : AppCompatActivity() {
         //搜索隐私政策同意
         ServiceSettings.updatePrivacyShow(this, true, true);
         ServiceSettings.updatePrivacyAgree(this, true);
-
-        getView()
-        mapView.onCreate(savedInstanceState)
-        initView()
-        initClickEvent()
     }
 
     override fun onResume() {
