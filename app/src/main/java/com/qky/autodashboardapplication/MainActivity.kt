@@ -2,11 +2,14 @@ package com.qky.autodashboardapplication
 
 import android.animation.ValueAnimator
 import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.Window
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.maps.AMap
@@ -15,8 +18,13 @@ import com.amap.api.maps.MapsInitializer
 import com.amap.api.maps.UiSettings
 import com.amap.api.services.core.ServiceSettings
 import com.qky.autodashboardapplication.vm.MainViewModel
+import com.unity3d.player.UnityPlayer
+
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var fm: FrameLayout
+    private lateinit var mUnityPlayer: UnityPlayer
+
     private lateinit var tvCarSpeed: TextView
     private lateinit var tvRemainNum: TextView
     private lateinit var tvDate: TextView
@@ -36,7 +44,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTest: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
+
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         setContentView(R.layout.activity_main)
 
@@ -45,6 +55,16 @@ class MainActivity : AppCompatActivity() {
         mapView.onCreate(savedInstanceState)
         initView()
         initClickEvent()
+
+        init3DView()
+
+    }
+
+    private fun init3DView() {
+        mUnityPlayer = UnityPlayer(this)
+        val frameLayout = findViewById<FrameLayout>(R.id.fm)
+        frameLayout.addView(mUnityPlayer)
+        mUnityPlayer.requestFocus()
     }
 
     private fun initPrivate() {
@@ -59,14 +79,21 @@ class MainActivity : AppCompatActivity() {
         ServiceSettings.updatePrivacyAgree(this, true);
     }
 
+    override fun onStart() {
+        super.onStart()
+        mUnityPlayer.resume()
+    }
+
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+        mUnityPlayer.resume()
     }
 
     override fun onPause() {
         super.onPause()
         mapView.onPause()
+        mUnityPlayer.pause()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -77,6 +104,38 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mapView.onDestroy()
+        mUnityPlayer.destroy()
+    }
+
+    // Low Memory Unity
+    override fun onLowMemory()
+    {
+        super.onLowMemory();
+        mUnityPlayer.lowMemory();
+    }
+
+    // Trim Memory Unity
+    override fun onTrimMemory(level: Int)
+    {
+        super.onTrimMemory(level);
+        if (level == TRIM_MEMORY_RUNNING_CRITICAL)
+        {
+            mUnityPlayer.lowMemory();
+        }
+    }
+
+    // This ensures the layout will be correct.
+    override fun onConfigurationChanged(newConfig: Configuration)
+    {
+        super.onConfigurationChanged(newConfig);
+        mUnityPlayer.configurationChanged(newConfig);
+    }
+
+    // Notify Unity of the focus change.
+    override fun onWindowFocusChanged(hasFocus: Boolean)
+    {
+        super.onWindowFocusChanged(hasFocus);
+        mUnityPlayer.windowFocusChanged(hasFocus);
     }
 
     private fun getView() {

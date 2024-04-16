@@ -17,6 +17,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        ndk {
+            abiFilters += listOf("armeabi-v7a","arm64-v8a")
+        }
     }
 
     buildFeatures{
@@ -45,6 +48,9 @@ android {
 }
 
 dependencies {
+    implementation (project(":unityLibrary"))
+    implementation (files("../unityLibrary/libs/unity-classes.jar"))
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")

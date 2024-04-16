@@ -23,4 +23,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "AutoDashboardApplication"
 include(":app")
+include(":unityLibrary")
  

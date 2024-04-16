@@ -16,4 +16,5 @@
     <string name="nap_start">智能行车辅助已开启</string>
     <string name="distance">70m</string>
     <string name="test">测试</string>
+    <string name="game_view_content_description">Game view</string>
 </resources>
