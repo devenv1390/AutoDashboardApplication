@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.FrameLayout
@@ -17,6 +18,8 @@ import com.amap.api.maps.MapView
 import com.amap.api.maps.MapsInitializer
 import com.amap.api.maps.UiSettings
 import com.amap.api.services.core.ServiceSettings
+import com.qky.autodashboardapplication.util.EDensityUtils
+import com.qky.autodashboardapplication.util.TTSUtil
 import com.qky.autodashboardapplication.vm.MainViewModel
 import com.unity3d.player.UnityPlayer
 
@@ -43,9 +46,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var btnTest: Button
 
+    private lateinit var ttsUtil: TTSUtil
+
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
+
+        EDensityUtils.setDensity(application,this);
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         setContentView(R.layout.activity_main)
@@ -57,7 +64,11 @@ class MainActivity : AppCompatActivity() {
         initClickEvent()
 
         init3DView()
+        initTTS()
+    }
 
+    private fun initTTS(){
+        ttsUtil = vmMain.initTTS(this)
     }
 
     private fun init3DView() {
@@ -249,5 +260,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setData() {
         vmMain.changeData()
+        ttsUtil.speak("开始测试")
     }
 }

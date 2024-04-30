@@ -1,10 +1,14 @@
 package com.qky.autodashboardapplication.vm
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.qky.autodashboardapplication.util.TTSUtil
+import com.unity3d.player.UnityPlayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,6 +45,32 @@ class MainViewModel : ViewModel() {
 
     private var testFlag = true
 
+    fun initTTS(context: Context): TTSUtil {
+        val ttsUtil = TTSUtil(context, object : TTSUtil.TTSListener {
+            override fun onInitSuccess() {
+                Log.e("TTSUtil", "TTS  TTSUtil  onInitSuccess 初始化语音成功")
+            }
+
+            override fun onInitFailure() {
+                Log.e("TTSUtil", "TTS  TTSUtil onInitFailure TTS引擎初始化失败")
+            }
+
+            override fun onSpeechStart() {
+                Log.e("TTSUtil", "TTS  TTSUtil onSpeechStart 语音合成开始")
+            }
+
+            override fun onSpeechDone() {
+                Log.e("TTSUtil", "TTS  TTSUtil onSpeechDone 语音合成完成")
+            }
+
+            override fun onSpeechError(errorMessage: String?) {
+                Log.e("TTSUtil", "TTS  TTSUtil onSpeechError 语音合成出错: $errorMessage")
+            }
+
+        })
+        return ttsUtil
+    }
+
     private fun transformPowerRecycleData() {
         if (powerData.value!! <= 0) {
             recycleData.value = abs(powerData.value!!)
@@ -68,6 +98,8 @@ class MainViewModel : ViewModel() {
     }
 
     fun changeData() {
+        UnityPlayer.UnitySendMessage("Interaction", "test", "msg")
+
         speedData.value = speedData.value!! + 1
         if (batteryData.value!! > 0) {
             batteryData.value = batteryData.value!! - 10
