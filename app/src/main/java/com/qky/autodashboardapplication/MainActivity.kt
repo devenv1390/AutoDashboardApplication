@@ -4,12 +4,12 @@ import android.animation.ValueAnimator
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.amap.api.location.AMapLocationClient
@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
 
-        EDensityUtils.setDensity(application,this);
+        EDensityUtils.setDensity(application,this)
 
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_main)
 
         initPrivate()
@@ -65,6 +65,12 @@ class MainActivity : AppCompatActivity() {
 
         init3DView()
         initTTS()
+
+    }
+
+    //文字提示方法
+    private fun showMsg(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun initTTS(){
@@ -80,14 +86,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun initPrivate() {
         //定位隐私政策同意
-        AMapLocationClient.updatePrivacyShow(this, true, true);
-        AMapLocationClient.updatePrivacyAgree(this, true);
+        AMapLocationClient.updatePrivacyShow(this, true, true)
+        AMapLocationClient.updatePrivacyAgree(this, true)
         //地图隐私政策同意
-        MapsInitializer.updatePrivacyShow(this, true, true);
-        MapsInitializer.updatePrivacyAgree(this, true);
+        MapsInitializer.updatePrivacyShow(this, true, true)
+        MapsInitializer.updatePrivacyAgree(this, true)
         //搜索隐私政策同意
-        ServiceSettings.updatePrivacyShow(this, true, true);
-        ServiceSettings.updatePrivacyAgree(this, true);
+        ServiceSettings.updatePrivacyShow(this, true, true)
+        ServiceSettings.updatePrivacyAgree(this, true)
     }
 
     override fun onStart() {
@@ -121,32 +127,32 @@ class MainActivity : AppCompatActivity() {
     // Low Memory Unity
     override fun onLowMemory()
     {
-        super.onLowMemory();
-        mUnityPlayer.lowMemory();
+        super.onLowMemory()
+        mUnityPlayer.lowMemory()
     }
 
     // Trim Memory Unity
     override fun onTrimMemory(level: Int)
     {
-        super.onTrimMemory(level);
+        super.onTrimMemory(level)
         if (level == TRIM_MEMORY_RUNNING_CRITICAL)
         {
-            mUnityPlayer.lowMemory();
+            mUnityPlayer.lowMemory()
         }
     }
 
     // This ensures the layout will be correct.
     override fun onConfigurationChanged(newConfig: Configuration)
     {
-        super.onConfigurationChanged(newConfig);
-        mUnityPlayer.configurationChanged(newConfig);
+        super.onConfigurationChanged(newConfig)
+        mUnityPlayer.configurationChanged(newConfig)
     }
 
     // Notify Unity of the focus change.
     override fun onWindowFocusChanged(hasFocus: Boolean)
     {
-        super.onWindowFocusChanged(hasFocus);
-        mUnityPlayer.windowFocusChanged(hasFocus);
+        super.onWindowFocusChanged(hasFocus)
+        mUnityPlayer.windowFocusChanged(hasFocus)
     }
 
     private fun getView() {

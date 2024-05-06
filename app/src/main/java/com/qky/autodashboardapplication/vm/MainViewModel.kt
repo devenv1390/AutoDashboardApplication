@@ -22,6 +22,8 @@ import kotlin.math.abs
  * @date 2024/3/12
  */
 class MainViewModel : ViewModel() {
+    private var isAdasTest = false
+
     private var speedData = MutableLiveData(0)
     val speed: LiveData<Int> get() = speedData
 
@@ -98,7 +100,11 @@ class MainViewModel : ViewModel() {
     }
 
     fun changeData() {
-        UnityPlayer.UnitySendMessage("Interaction", "test", "msg")
+        if(isAdasTest){
+            UnityPlayer.UnitySendMessage("Interaction", "Next", "msg")
+        }else{
+            UnityPlayer.UnitySendMessage("Interaction", "Next", "msg")
+        }
 
         speedData.value = speedData.value!! + 1
         if (batteryData.value!! > 0) {
