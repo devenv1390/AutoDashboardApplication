@@ -103,7 +103,7 @@ class MainViewModel : ViewModel() {
         if(isAdasTest){
             UnityPlayer.UnitySendMessage("Interaction", "Next", "msg")
         }else{
-            UnityPlayer.UnitySendMessage("Interaction", "Next", "msg")
+            UnityPlayer.UnitySendMessage("Interaction", "Previous", "msg")
         }
 
         speedData.value = speedData.value!! + 1

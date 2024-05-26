@@ -263,17 +263,19 @@
                     android:textColor="@color/main_text"
                     android:textSize="30sp" />
 
-                <com.qky.autodashboardapplication.ui.DrawableCenterTextView
+                <TextView
                     android:id="@+id/dctv_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:drawableStart="@mipmap/ic_launcher"
+                    android:background="@drawable/background"
                     android:drawablePadding="10dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:text="@string/nap_ready"
                     android:textColor="@color/main_text"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    app:drawableStartCompat="@drawable/icon" />
 
             </LinearLayout>
 
